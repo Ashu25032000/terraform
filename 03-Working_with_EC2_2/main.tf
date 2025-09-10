@@ -3,14 +3,14 @@ terraform {
   required_providers {
     aws = {
       source  = "hashicorp/aws"
-      version = "4.67.0"
+      version = "6.10.0"
     }
   }
 }
 
 provider "aws" {
   region = "ap-south-1"
-  profile = "<profile_name>"
+  profile = "terraform"
 }
 
 
@@ -30,6 +30,12 @@ resource "aws_security_group" "instance" {
     protocol	  = "tcp"
     cidr_blocks	= ["0.0.0.0/0"]
   }
+  ingress {
+    from_port	  = 8080
+    to_port	      = 8080
+    protocol	  = "tcp"
+    cidr_blocks	= ["0.0.0.0/0"]
+  }
   egress {
     from_port	  = 0
     to_port	      = 0
@@ -41,10 +47,10 @@ resource "aws_security_group" "instance" {
 
 # Create an EC2 instance
 resource "aws_instance" "myinstance" {
-  ami           = "ami-0b41f7055516b991a"
-  instance_type = "t2.micro"
+  ami           = "ami-0861f4e788f5069dd"
+  instance_type = "t3.micro"
   vpc_security_group_ids  = ["${aws_security_group.instance.id}"]
-  key_name = "mumbai"
+  key_name = "ashwini"
   user_data = "${file("install_apache.sh")}"	  
   tags = {
     Name = "myec2"
