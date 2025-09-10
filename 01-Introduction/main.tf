@@ -12,6 +12,9 @@ provider "aws" {
   region = "ap-south-1"
 }
 
+
+
+
 # # Create an EC2 instance
 # resource "aws_instance" "example" {
 #   ami           = "<ami_name>"
