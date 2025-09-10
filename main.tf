@@ -13,8 +13,12 @@ provider "aws" {
   profile = "terraform"
 }
 
+
 # # Create an EC2 instance
-# resource "aws_instance" "example" {
-#   ami           = "<ami_name>"
-#   instance_type = "<instance_type_name>"
-# }
+resource "aws_instance" "example" {
+  ami           = "ami-0861f4e788f5069dd"
+  instance_type = "t3.micro"
+  tags = {
+    "Name" = "My instance"
+  }
+}
